@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>حال من — ردیاب خلق و خو</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts - Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: hsla(0, 100%, 50%, 1);
+            background-image:
+                radial-gradient(at 40% 20%, hsla(28, 100%, 74%, 1) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 1) 0px, transparent 50%),
+                radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 1) 0px, transparent 50%),
+                radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 1) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 1) 0px, transparent 50%);
+            min-height: 100vh;
+            padding: 10px 0;
+            margin: 0;
+        }
+
+        .card {
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .mood-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            margin: 16px auto;
+        }
+
+        @media (min-width: 768px) {
+            .mood-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        .slider-container {
+            margin: 20px 0;
+        }
+
+        .mood-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            .mood-label {
+                font-size: 14px;
+            }
+        }
+
+        .mood-display {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 12px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .mood-display {
+                font-size: 28px;
+            }
+        }
+
+        .btn-save {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            font-weight: 700;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .btn-save:hover {
+            background: linear-gradient(45deg, #ff5252, #e04e1a);
+        }
+
+        .btn-report {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            border: none;
+            font-weight: 700;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .btn-report:hover {
+            background: linear-gradient(45deg, #3bb7ac, #3a8a7a);
+        }
+
+        .chart-container {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                padding: 20px;
+                border-radius: 15px;
+            }
+        }
+
+        .reason-tag {
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 8px 14px;
+            border-radius: 50px;
+            margin: 4px;
+            display: inline-block;
+            font-size: 13px;
+            border: 2px solid #e9ecef;
+            color: black;
+            background: white;
+        }
+
+        @media (min-width: 768px) {
+            .reason-tag {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+
+        .reason-tag:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .reason-tag.active {
+            background: #007bff;
+            color: white;
+            border-color: #0056b3;
+            box-shadow: 0 3px 8px rgba(0, 123, 255, 0.25);
+        }
+
+        #custom-reason {
+            display: none;
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 14px;
+        }
+
+        .pagination .page-link {
+            padding: 4px 10px;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .pagination .page-link {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+        }
+
+        .mood-badge {
+            font-weight: 600;
+            padding: 0.3em 0.7em;
+            border-radius: 50px;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .mood-badge {
+                padding: 0.4em 0.8em;
+                font-size: 14px;
+            }
+        }
+
+        .chart-small {
+            height: 200px !important;
+        }
+
+        @media (min-width: 768px) {
+            .chart-small {
+                height: 250px !important;
+            }
+        }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+
+            .table th,
+            .table td {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+
+        .modal-body .fa-3x {
+            font-size: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .modal-body .fa-3x {
+                font-size: 3rem;
+            }
+        }
+
+        .container {
+            padding: 0 12px;
+        }
+
+        @media (min-width: 576px) {
+            .container {
+                max-width: 540px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        .nav-tabs .nav-link {
+            font-size: 14px;
+            padding: 8px 8px;
+        }
+
+        @media (min-width: 768px) {
+            .nav-tabs .nav-link {
+                font-size: 16px;
+                padding: 10px 16px;
+            }
+        }
+
+        #reportTabs {
+            padding-right: 14px !important;
+        }
+
+        /* جلوگیری از رشد بی‌نهایت نمودارها */
+        .chart-container canvas {
+            max-height: 300px;
+            height: auto !important;
+        }
+
+        .mood-img {
+            border-radius: 20px;
+        }
+
+        /* --- استایل جدید برای اسلایدر جذاب --- */
+
+        /* 1. ریست کردن ظاهر پیش‌فرض اسلایدر */
+        #mood-slider {
+            -webkit-appearance: none;
+            /* برای مرورگرهای کروم، سافاری و اج */
+            appearance: none;
+            width: 100%;
+            background: transparent;
+            /* حذف پس‌زمینه پیش‌فرض */
+            cursor: pointer;
+            height: 24px;
+            /* افزایش ارتفاع برای کلیک راحت‌تر */
+        }
+
+        /* 2. استایل دادن به نوار اصلی (Track) */
+        #mood-slider::-webkit-slider-runnable-track {
+            height: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            /* این گرادیان همان رنگ‌هایی است که شما خواستید */
+            background: linear-gradient(to right,
+                    #d9534f,
+                    /* افتضاح - قرمز */
+                    #f0ad4e,
+                    /* بد - نارنجی */
+                    #ffc107,
+                    /* معمولی - زرد */
+                    #5cb85c,
+                    /* خوب - سبز روشن */
+                    #28a745
+                    /* عالی - سبز پررنگ */
+                );
+        }
+
+        #mood-slider::-moz-range-track {
+            height: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to right,
+                    #28a745,
+                    #5cb85c,
+                    #ffc107,
+                    #f0ad4e,
+                    #d9534f);
+        }
+
+        /* 3. استایل دادن به دستگیره (Thumb) */
+        #mood-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -7px;
+            /* برای قرار گرفتن دقیق در وسط نوار */
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            border: 2px solid #667eea;
+            /* رنگی از پس‌زمینه اصلی صفحه */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        #mood-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            border: 2px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        /* 4. افکت هاور برای دستگیره */
+        #mood-slider:hover::-webkit-slider-thumb {
+            transform: scale(1.1);
+        }
+
+        #mood-slider:hover::-moz-range-thumb {
+            transform: scale(1.1);
+        }
+
+        /* 1. ریست کردن و تنظیم جهت اسلایدر */
+        #mood-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            background: transparent;
+            cursor: pointer;
+            height: 24px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center mb-3 mt-2">
+            <h1 class="display-6 fw-bold text-white">🌅 حال من 🌙</h1>
+            <p class="text-white-75 small">هر لحظه، حال خودت رو ثبت کن و روندت رو ببین!</p>
+        </div>
+
+        <div class="card p-3">
+            <div class="text-center">
+                <img id="mood-img" class="mood-img" src="" alt="تصویر حال">
+                <p>الان حالت چطوره؟</p>
+                <div class="slider-container" style="direction: ltr;">
+                    <input type="range" id="mood-slider" min="0" max="4" value="2" step="1" class="form-range">
+                    <div class="d-flex justify-content-between text-muted small">
+                        <span class="mood-label">افتضاح</span>
+                        <span class="mood-label">بد</span>
+                        <span class="mood-label">معمولی</span>
+                        <span class="mood-label">خوب</span>
+                        <span class="mood-label">عالی</span>
+                    </div>
+                </div>
+                <div id="mood-display" class="mood-display">معمولی</div>
+            </div>
+
+            <hr class="my-3">
+
+            <div class="mb-3" style="text-align: center;">
+                <h6 class="fw-bold small">دلیل این حالت چیه؟</h6>
+                <div id="reason-tags" class="mb-2"></div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reason" id="reason-other" value="other">
+                    <label class="form-check-label small" for="reason-other">سایر (توضیح دهید)</label>
+                </div>
+                <input type="text" id="custom-reason" class="form-control mt-2" placeholder="دلیل خود را بنویسید...">
+            </div>
+
+            <div class="mb-3" style="text-align: center; margin: auto;">
+                <h6 class="fw-bold small">کی اینجوری بودی؟ </h6>
+                <select id="time-select" class="form-select form-select-sm">
+                    <option value="صبح">🌅 صبح</option>
+                    <option value="میانه روز">☀️ میانه روز</option>
+                    <option value="عصر">🌇 عصر</option>
+                    <option value="شب">🌙 شب</option>
+                    <option value="نیمه‌شب">🌌 نیمه‌شب</option>
+                </select>
+            </div>
+
+            <button id="save-btn" class="btn btn-save w-100 mt-3">
+                <i class="fas fa-save"></i> ذخیره این لحظه
+            </button>
+        </div>
+
+        <!-- جدول رکوردها با Pagination -->
+        <div class="card p-3">
+            <h6 class="mb-2 fw-bold">آخرین رکوردها</h6>
+            <div id="records-table" class="table-responsive small">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr>
+                            <th>تاریخ</th>
+                            <th>زمان</th>
+                            <th>حالت</th>
+                            <th>دلیل</th>
+                            <th><i class="fas fa-trash"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="records-tbody"></tbody>
+                </table>
+            </div>
+            <nav aria-label="صفحه‌بندی رکوردها" class="small">
+                <ul id="pagination" class="pagination justify-content-center pagination-sm"></ul>
+            </nav>
+        </div>
+
+        <div class="text-center mb-3">
+            <button id="report-btn" class="btn btn-report w-100">
+                <i class="fas fa-chart-pie"></i> گزارش کامل
+            </button>
+        </div>
+
+        <!-- مدال موفقیت -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white py-2">
+                        <h6 class="modal-title"><i class="fas fa-check-circle"></i> ذخیره شد!</h6>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center py-3">
+                        <i class="fas fa-clipboard-check fa-3x text-success mb-2"></i>
+                        <p class="small" id="modal-message">حال شما با موفقیت ذخیره شد!</p>
+                    </div>
+                    <div class="modal-footer py-2">
+                        <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">باشه</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش گزارش -->
+        <div id="report-section" class="card p-3 mb-4 d-none">
+            <h6 class="text-center mb-2 fw-bold"><i class="fas fa-chart-line"></i> گزارش تحلیلی</h6>
+
+            <ul class="nav nav-tabs small mb-3" id="reportTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active small" id="overview-tab" data-bs-toggle="tab"
+                        data-bs-target="#overview" type="button">📊 کلیات</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link small" id="timeline-tab" data-bs-toggle="tab" data-bs-target="#timeline"
+                        type="button">📈 روند</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link small" id="reasons-tab" data-bs-toggle="tab" data-bs-target="#reasons"
+                        type="button">🧠 دلایل</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link small" id="daytime-tab" data-bs-toggle="tab" data-bs-target="#daytime"
+                        type="button">⏰ روز</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link small" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit"
+                        type="button">✏️ ویرایش</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="reportTabsContent">
+                <!-- Tab 1: Overview -->
+                <div class="tab-pane fade show active" id="overview">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <div class="chart-container">
+                                <h6 class="text-center small">توزیع حالات — با درصد و جزئیات</h6>
+                                <canvas id="mood-pie-chart" class="chart-small"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="chart-container">
+                                <h6 class="text-center small">آمار کلی</h6>
+                                <div id="stats-summary" class="text-center small"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Timeline -->
+                <div class="tab-pane fade" id="timeline">
+                    <div class="chart-container">
+                        <h6 class="text-center small">روند تغییرات حال</h6>
+                        <canvas id="mood-line-chart" class="chart-small"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Reasons per Mood -->
+                <div class="tab-pane fade" id="reasons">
+                    <div class="row g-2" id="mood-reason-charts">
+                        <!-- نمودارهای دلایل اینجا رندر می‌شوند — فقط هنگام باز شدن تب -->
+                    </div>
+                </div>
+
+                <!-- Tab 4: Day Time Analysis -->
+                <div class="tab-pane fade" id="daytime">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <div class="chart-container">
+                                <h6 class="text-center small">توزیع ثبت‌ها در ساعات روز</h6>
+                                <canvas id="time-of-day-chart" class="chart-small"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-12" id="time-mood-charts">
+                            <!-- نمودارهای حالات در هر زمان روز اینجا رندر می‌شوند — فقط هنگام باز شدن تب -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 5: Edit -->
+                <div class="tab-pane fade" id="edit">
+                    <h6 class="mb-2 fw-bold small">همه رکوردها</h6>
+                    <div id="full-records-list" class="list-group small"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <p>طراحی و ایده : حامد خانه پز - 1404</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Main Script -->
+    <script>
+        // ========== تنظیمات اولیه ==========
+        const moods = ["افتضاح", "بد", "معمولی", "خوب", "عالی"];
+        const moodColors = ["#d9534f", "#f0ad4e", "#ffc107", "#5cb85c", "#28a745"];
+        const moodImages = [
+            "1.png", // افتضاح
+            "2.png", // بد
+            "3.png", // معمولی
+            "4.png", // خوب
+            "5.png"  // عالی
+        ];
+
+        const reasons = [
+            "محیط کار", "محیط خونه", "زندگی زناشویی", "دخل و خرج", "خانوادگی",
+            "دوستان", "سلامتی", "ترافیک", "خواب بد", "خستگی", "مریضی", "استرس", "تنهایی", "خاله زنک بازی"
+        ];
+
+        const timesOfDay = ["صبح", "میانه روز", "عصر", "شب", "نیمه‌شب"];
+        const timeColors = ["#FFB3BA", "#FFDFBA", "#FFFFBA", "#BAFFC9", "#BAE1FF"];
+
+        // ========== المنت‌ها ==========
+        const slider = document.getElementById('mood-slider');
+        const moodDisplay = document.getElementById('mood-display');
+        const moodImg = document.getElementById('mood-img');
+        const reasonTags = document.getElementById('reason-tags');
+        const reasonOther = document.getElementById('reason-other');
+        const customReason = document.getElementById('custom-reason');
+        const saveBtn = document.getElementById('save-btn');
+        const reportBtn = document.getElementById('report-btn');
+        const reportSection = document.getElementById('report-section');
+        const recordsTbody = document.getElementById('records-tbody');
+        const paginationEl = document.getElementById('pagination');
+        const moodReasonCharts = document.getElementById('mood-reason-charts');
+        const fullRecordsList = document.getElementById('full-records-list');
+        const timeMoodCharts = document.getElementById('time-mood-charts');
+
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        const modalMessage = document.getElementById('modal-message');
+
+        // ========== رندر تگ‌های دلیل ==========
+        reasons.forEach(reason => {
+            const tag = document.createElement('span');
+            tag.className = 'reason-tag'; // ← حذف 'badge' برای جلوگیری از رنگ سفید
+            tag.textContent = reason;
+            tag.dataset.value = reason;
+            tag.addEventListener('click', function () {
+                document.querySelectorAll('.reason-tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                reasonOther.checked = false;
+                customReason.style.display = 'none';
+            });
+            reasonTags.appendChild(tag);
+        });
+
+        reasonOther.addEventListener('change', function () {
+            if (this.checked) {
+                customReason.style.display = 'block';
+                customReason.focus();
+                document.querySelectorAll('.reason-tag').forEach(t => t.classList.remove('active'));
+            }
+        });
+
+        // ========== بروزرسانی نمایش حال ==========
+        function updateMoodDisplay() {
+            const index = slider.value;
+            moodDisplay.textContent = moods[index];
+            moodDisplay.style.color = moodColors[index];
+            moodImg.src = moodImages[index];
+        }
+
+        slider.addEventListener('input', updateMoodDisplay);
+        updateMoodDisplay();
+
+        // ========== Pagination State ==========
+        let currentPage = 1;
+        const recordsPerPage = 10;
+
+        // ========== ذخیره رکورد — بدون محدودیت زمان ==========
+        saveBtn.addEventListener('click', () => {
+            const moodIndex = slider.value;
+            const mood = moods[moodIndex];
+            const time = document.getElementById('time-select').value;
+            const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+
+            let selectedReason = '';
+            const activeTag = document.querySelector('.reason-tag.active');
+            if (activeTag) {
+                selectedReason = activeTag.dataset.value;
+            } else if (reasonOther.checked && customReason.value.trim()) {
+                selectedReason = customReason.value.trim();
+            } else {
+                alert("لطفاً یک دلیل انتخاب کنید.");
+                return;
+            }
+
+            // ⚠️ اطمینان از اینکه records یک آرایه است
+            let records = JSON.parse(localStorage.getItem('moodRecords') || '[]');
+            if (!Array.isArray(records)) {
+                records = [];
+            }
+
+            records.push({
+                date: date,
+                time: time,
+                mood: mood,
+                reason: selectedReason,
+                timestamp: new Date().toISOString()
+            });
+
+            localStorage.setItem('moodRecords', JSON.stringify(records));
+
+            // ریست فرم
+            slider.value = 2;
+            updateMoodDisplay();
+            document.querySelectorAll('.reason-tag').forEach(t => t.classList.remove('active'));
+            reasonOther.checked = false;
+            customReason.style.display = 'none';
+            customReason.value = '';
+
+            // نمایش مدال موفقیت
+            modalMessage.textContent = `حال (${time}) — ${mood} با دلیل «${selectedReason}» ذخیره شد.`;
+            successModal.show();
+
+            // بازخوانی جدول
+            loadRecordsTable(1);
+        });
+
+        // ========== بارگذاری جدول رکوردها ==========
+        function loadRecordsTable(page = 1) {
+            currentPage = page;
+            let records = JSON.parse(localStorage.getItem('moodRecords') || '[]');
+
+            // ⚠️ مهاجرت داده‌های قدیمی (آبجکت → آرایه)
+            if (records !== null && typeof records === 'object' && !Array.isArray(records)) {
+                const migrated = [];
+                for (let date in records) {
+                    for (let time in records[date]) {
+                        migrated.push({
+                            date: date,
+                            time: time,
+                            mood: records[date][time].mood,
+                            reason: records[date][time].reason,
+                            timestamp: records[date][time].timestamp || new Date().toISOString()
+                        });
+                    }
+                }
+                records = migrated;
+                localStorage.setItem('moodRecords', JSON.stringify(records));
+            }
+
+            // اگر هنوز آرایه نبود — آرایه خالی بساز
+            if (!Array.isArray(records)) {
+                records = [];
+            }
+
+            // مرتب‌سازی بر اساس تاریخ (جدیدترین اول)
+            const sortedData = [...records].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            // پاگینیشن
+            const startIndex = (page - 1) * recordsPerPage;
+            const endIndex = startIndex + recordsPerPage;
+            const paginatedData = sortedData.slice(startIndex, endIndex);
+            const totalPages = Math.ceil(records.length / recordsPerPage);
+
+            // رندر ردیف‌ها
+            recordsTbody.innerHTML = '';
+            if (paginatedData.length === 0) {
+                recordsTbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-3">هنوز رکوردی ثبت نشده است.</td>
+                    </tr>
+                `;
+            } else {
+                paginatedData.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    const moodColor = moodColors[moods.indexOf(item.mood)];
+                    row.innerHTML = `
+                        <td class="small">${item.date}</td>
+                        <td class="small">${item.time}</td>
+                        <td><span class="mood-badge" style="background:${moodColor}; color:white;">${item.mood}</span></td>
+                        <td class="small">${item.reason}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger delete-record" data-index="${startIndex + index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    recordsTbody.appendChild(row);
+                });
+
+                // ایونت حذف
+                document.querySelectorAll('.delete-record').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.dataset.index);
+                        if (confirm("آیا مطمئنید می‌خواهید این رکورد را حذف کنید؟")) {
+                            let records = JSON.parse(localStorage.getItem('moodRecords') || '[]');
+                            if (!Array.isArray(records)) records = [];
+                            records.splice(index, 1);
+                            localStorage.setItem('moodRecords', JSON.stringify(records));
+                            loadRecordsTable(currentPage);
+                            generateReports();
+                            // نمودارها فقط در تب‌ها رندر می‌شن — پس نیازی به generateReports کلی نیست
+                        }
+                    });
+                });
+            }
+
+            renderPagination(totalPages, page);
+        }
+
+        function renderPagination(totalPages, currentPage) {
+            paginationEl.innerHTML = '';
+            if (totalPages <= 1) return;
+
+            const prevItem = document.createElement('li');
+            prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevItem.innerHTML = `<a class="page-link" href="#">«</a>`;
+            if (currentPage > 1) {
+                prevItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loadRecordsTable(currentPage - 1);
+                });
+            }
+            paginationEl.appendChild(prevItem);
+
+            const startPage = Math.max(1, currentPage - 1);
+            const endPage = Math.min(totalPages, currentPage + 1);
+
+            for (let i = startPage; i <= endPage; i++) {
+                const item = document.createElement('li');
+                item.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                item.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                if (i !== currentPage) {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        loadRecordsTable(i);
+                    });
+                }
+                paginationEl.appendChild(item);
+            }
+
+            const nextItem = document.createElement('li');
+            nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextItem.innerHTML = `<a class="page-link" href="#">»</a>`;
+            if (currentPage < totalPages) {
+                nextItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loadRecordsTable(currentPage + 1);
+                });
+            }
+            paginationEl.appendChild(nextItem);
+        }
+
+        // ========== نمایش گزارش ==========
+        reportBtn.addEventListener('click', () => {
+            reportSection.classList.remove('d-none');
+            generateReports();
+        });
+
+        // ========== تولید گزارش‌های اصلی (کلیات + روند + آمار + لیست کامل) ==========
+        function generateReports() {
+            let records = JSON.parse(localStorage.getItem('moodRecords') || '[]');
+
+            // ⚠️ مهاجرت داده‌های قدیمی (آبجکت → آرایه)
+            if (records !== null && typeof records === 'object' && !Array.isArray(records)) {
+                const migrated = [];
+                for (let date in records) {
+                    for (let time in records[date]) {
+                        migrated.push({
+                            date: date,
+                            time: time,
+                            mood: records[date][time].mood,
+                            reason: records[date][time].reason,
+                            timestamp: records[date][time].timestamp || new Date().toISOString()
+                        });
+                    }
+                }
+                records = migrated;
+                localStorage.setItem('moodRecords', JSON.stringify(records));
+            }
+
+            // اگر هنوز آرایه نبود — آرایه خالی بساز
+            if (!Array.isArray(records)) {
+                records = [];
+            }
+
+            if (records.length === 0) {
+                document.getElementById('stats-summary').innerHTML = '<p class="text-muted">هنوز داده‌ای برای تحلیل وجود ندارد.</p>';
+                fullRecordsList.innerHTML = '<div class="list-group-item text-center text-muted py-3">هنوز رکوردی ثبت نشده است.</div>';
+                return;
+            }
+
+            // ========== داده‌های کلی ==========
+            const moodCounts = {};
+            moods.forEach(m => moodCounts[m] = 0);
+
+            records.forEach(item => {
+                moodCounts[item.mood]++;
+            });
+
+            // ========== نمودار دایره‌ای کلی حالات ==========
+            const total = records.length;
+            const labels = moods.map(m => `${m} (${moodCounts[m]} - ${total ? Math.round((moodCounts[m] / total) * 100) : 0}%)`);
+            const data = moods.map(m => moodCounts[m]);
+            renderPieChart('mood-pie-chart', labels, data, moodColors);
+
+            // ========== نمودار خطی ==========
+            const sortedData = [...records].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+            const lineLabels = sortedData.map(d => {
+                const dDate = new Date(d.date);
+                return `${dDate.getMonth() + 1}/${dDate.getDate()}`;
+            });
+            const lineData = sortedData.map(d => moods.indexOf(d.mood));
+            renderLineChart('mood-line-chart', lineLabels, lineData, '#4e73df');
+
+            // ========== آمار کلی ==========
+            const totalRecords = records.length;
+            const avgMood = totalRecords > 0 ? (records.reduce((sum, d) => sum + moods.indexOf(d.mood), 0) / totalRecords).toFixed(2) : 0;
+            const bestMoodDays = records.filter(d => d.mood === "عالی").length;
+            const worstMoodDays = records.filter(d => d.mood === "افتضاح").length;
+
+            document.getElementById('stats-summary').innerHTML = `
+                <p class="mb-1"><strong>کل رکوردها:</strong> ${totalRecords}</p>
+                <p class="mb-1"><strong>میانگین حال:</strong> ${avgMood}/4</p>
+                <p class="mb-1"><strong>روزهای عالی:</strong> ${bestMoodDays}</p>
+                <p class="mb-1"><strong>روزهای افتضاح:</strong> ${worstMoodDays}</p>
+            `;
+
+            // ========== لیست کامل رکوردها ==========
+            fullRecordsList.innerHTML = '';
+            if (records.length === 0) {
+                fullRecordsList.innerHTML = '<div class="list-group-item text-center text-muted py-3">هنوز رکوردی ثبت نشده است.</div>';
+            } else {
+                [...records].reverse().forEach((item, index) => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'list-group-item d-flex justify-content-between align-items-center py-2';
+                    const moodColor = moodColors[moods.indexOf(item.mood)];
+                    itemEl.innerHTML = `
+                        <div>
+                            <div class="small fw-bold">${item.date} - ${item.time}</div>
+                            <span class="badge" style="background:${moodColor}; color:white; font-size:0.85em;">${item.mood}</span>
+                            <div class="text-muted small mt-1">${item.reason}</div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger delete-full-record" data-index="${records.length - 1 - index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    fullRecordsList.appendChild(itemEl);
+                });
+
+                document.querySelectorAll('.delete-full-record').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = parseInt(this.dataset.index);
+                        if (confirm("آیا مطمئنید می‌خواهید این رکورد را حذف کنید؟")) {
+                            let records = JSON.parse(localStorage.getItem('moodRecords') || '[]');
+                            if (!Array.isArray(records)) records = [];
+                            records.splice(index, 1);
+                            localStorage.setItem('moodRecords', JSON.stringify(records));
+                            this.closest('.list-group-item').remove();
+                            generateReports();
+                            loadRecordsTable(currentPage);
+                            generateReports();
+                        }
+                    });
+                });
+            }
+        }
+
+        // ========== توابع نمودار ==========
+        function renderPieChart(id, labels, data, colors) {
+            const canvas = document.getElementById(id);
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+
+            // اگر نمودار قبلی وجود داشت، ابتدا destroy کن
+            if (window[id + 'Chart']) {
+                window[id + 'Chart'].destroy();
+            }
+
+            // نمودار جدید
+            window[id + 'Chart'] = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data,
+                        backgroundColor: colors,
+                        borderWidth: 2,
+                        borderColor: '#fff',
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 12
+                                },
+                                padding: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.label}: ${context.raw} بار`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // ✅ راه‌حل اصلی: بعد از 100ms یک resize اجرا کن — تا نمودار موقع نمایش درست شکل بگیره
+            setTimeout(() => {
+                if (window[id + 'Chart']) {
+                    window[id + 'Chart'].resize();
+                }
+            }, 100);
+        }
+
+        function renderLineChart(id, labels, data, color) {
+            const ctx = document.getElementById(id).getContext('2d');
+            if (window[id + 'Chart']) window[id + 'Chart'].destroy();
+            window[id + 'Chart'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'میزان حال',
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: color + '20',
+                        borderWidth: 2,
+                        pointRadius: 3,
+                        pointBackgroundColor: color,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 4,
+                            ticks: {
+                                stepSize: 1,
+                                font: {
+                                    size: 11
+                                },
+                                callback: function (value) {
+                                    return moods[value] || value;
+                                }
+                            },
+                            grid: {
+                                display: true
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 10
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `حال: ${moods[context.raw]} (${context.raw}/4)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ========== رندر نمودارها فقط هنگام باز شدن تب ==========
+        document.addEventListener('DOMContentLoaded', function () {
+            loadRecordsTable(1);
+
+            // تب دلایل
+            document.getElementById('reasons-tab').addEventListener('shown.bs.tab', function () {
+                setTimeout(() => {
+                    const records = JSON.parse(localStorage.getItem('moodRecords') || '[]');
+                    if (!Array.isArray(records)) return;
+
+                    const moodReasonMap = {};
+                    records.forEach(item => {
+                        if (!moodReasonMap[item.mood]) moodReasonMap[item.mood] = {};
+                        moodReasonMap[item.mood][item.reason] = (moodReasonMap[item.mood][item.reason] || 0) + 1;
+                    });
+
+                    const moodReasonCharts = document.getElementById('mood-reason-charts');
+                    moodReasonCharts.innerHTML = '';
+                    moods.forEach(mood => {
+                        if (!moodReasonMap[mood] || Object.keys(moodReasonMap[mood]).length === 0) return;
+
+                        const col = document.createElement('div');
+                        col.className = 'col-12 mb-3';
+                        col.innerHTML = `
+                            <div class="chart-container">
+                                <h6 class="text-center small">دلایل "${mood}"</h6>
+                                <canvas id="chart-${mood.replace(/\s+/g, '-')}"></canvas>
+                            </div>
+                        `;
+                        moodReasonCharts.appendChild(col);
+
+                        const reasonEntries = Object.entries(moodReasonMap[mood])
+                            .sort((a, b) => b[1] - a[1])
+                            .slice(0, 6);
+                        const labels = reasonEntries.map(r => r[0]);
+                        const data = reasonEntries.map(r => r[1]);
+
+                        const colors = labels.map((_, i) => {
+                            const hue = (i * 137) % 360;
+                            return `hsl(${hue}, 70%, 60%)`;
+                        });
+
+                        setTimeout(() => {
+                            renderPieChart(
+                                `chart-${mood.replace(/\s+/g, '-')}`,
+                                labels,
+                                data,
+                                colors
+                            );
+                        }, 150);
+                    });
+                }, 100);
+            });
+
+            // تب روز
+            document.getElementById('daytime-tab').addEventListener('shown.bs.tab', function () {
+                setTimeout(() => {
+                    const records = JSON.parse(localStorage.getItem('moodRecords') || '[]');
+                    if (!Array.isArray(records)) return;
+
+                    const timeCounts = {};
+                    const timeMoodMap = {};
+
+                    records.forEach(item => {
+                        timeCounts[item.time] = (timeCounts[item.time] || 0) + 1;
+                        if (!timeMoodMap[item.time]) timeMoodMap[item.time] = {};
+                        timeMoodMap[item.time][item.mood] = (timeMoodMap[item.time][item.mood] || 0) + 1;
+                    });
+
+                    // نمودار کلی ساعات روز
+                    const timeLabels = timesOfDay.map(t => `${t} (${timeCounts[t] || 0})`);
+                    const timeData = timesOfDay.map(t => timeCounts[t] || 0);
+                    renderPieChart('time-of-day-chart', timeLabels, timeData, timeColors);
+
+                    // نمودارهای حالات در هر زمان
+                    const timeMoodCharts = document.getElementById('time-mood-charts');
+                    timeMoodCharts.innerHTML = '';
+                    timesOfDay.forEach(time => {
+                        if (!timeMoodMap[time] || Object.keys(timeMoodMap[time]).length === 0) return;
+
+                        const col = document.createElement('div');
+                        col.className = 'col-12 mb-3';
+                        col.innerHTML = `
+                            <div class="chart-container">
+                                <h6 class="text-center small">حالات در "${time}"</h6>
+                                <canvas id="chart-time-${time.replace(/\s+/g, '-')}"></canvas>
+                            </div>
+                        `;
+                        timeMoodCharts.appendChild(col);
+
+                        const moodEntries = Object.entries(timeMoodMap[time]);
+                        const labels = moodEntries.map(e => e[0]);
+                        const data = moodEntries.map(e => e[1]);
+                        const colors = labels.map(m => moodColors[moods.indexOf(m)]);
+
+                        setTimeout(() => {
+                            renderPieChart(
+                                `chart-time-${time.replace(/\s+/g, '-')}`,
+                                labels,
+                                data,
+                                colors
+                            );
+                        }, 150);
+                    });
+                }, 100);
+            });
+        });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+              .then(registration => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+              })
+              .catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+              });
+          });
+        }
+      </script>
+</body>
+
+</html>
